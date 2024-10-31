@@ -1,6 +1,6 @@
 terraform {
     backend "gcs" {
-        bucket = "terraform-cloud-data-orchestration-pipeline"
+        bucket = "terraform-prj01-cloud-data-orch"
         prefix = "terraform/state"
     }
 }
