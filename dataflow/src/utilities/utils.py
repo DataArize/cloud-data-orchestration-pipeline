@@ -1,20 +1,30 @@
-from src.utilities.logger import logger
+from utilities.logger import logger
 
 
 def validate_record(record):
+    """
+    Validates the given record to ensure it has all required fields.
+
+    Args:
+        record: The record to validate, expected to have certain fields.
+
+    Returns:
+        The validated record if all required fields are present;
+        None if any required field is missing.
+    """
+    required_fields = ['track_id', 'artists', 'popularity', 'duration_ms']
+
     try:
-        # Basic field presence check
-        required_fields = ['track_id', 'artists', 'popularity', 'duration_ms']
-        for field in required_fields:
-            if not record.get(field):
-                logger.warning(f"Missing required field {field} in record: {record}")
-                return None
+        # Check for missing required fields
+        missing_fields = [field for field in required_fields if not getattr(record, field, None)]
 
-        # Data type validation
-        record['popularity'] = int(record['popularity'])
-        record['duration_ms'] = float(record['duration_ms'])
+        if missing_fields:
+            logger.warning(f"Missing essential fields in record: {record}. Missing fields: {missing_fields}")
+            return None  # Return None if any required field is missing
 
-        return record
-    except (ValueError, KeyError) as e:
-        logger.error(f"Validation error in record {record}: {e}")
-        return None
+        logger.info(f"Record validated successfully: {record}")  # Log successful validation
+        return record  # Return the validated record if all fields are present
+
+    except (ValueError, AttributeError, KeyError) as e:
+        logger.error(f"Validation error in record {record}: {e}")  # Log any exceptions that occur during validation
+        return None  # Return None in case of any validation error

@@ -1,0 +1,5 @@
+.idea
+terraform/environments/**/.terraform
+/terraform/environments/**/.terraform.lock.hcl
+/dataflow/temp/
+/dataflow/src/.venv/
