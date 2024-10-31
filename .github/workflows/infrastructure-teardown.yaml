@@ -10,6 +10,13 @@ jobs:
   terraform:
     name: 'Destroy Infrastructure Setup'
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_environment: ${{ secrets.ENVIRONMENT }}
+      TF_VAR_logging_bucket: ${{ secrets.LOGGING_BUCKET }}
+      TF_VAR_storage_bucket: ${{ secrets.STORAGE_BUCKET }}
+      TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
+      TF_VAR_project_region: ${{ secrets.PROJECT_REGION }}
+
 
     steps:
       - name: Git Checkout
