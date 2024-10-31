@@ -48,3 +48,7 @@ variable "logging_bucket" {
   type = string
   description = "The name of the Google Cloud Storage bucket where logs will be stored. It must be globally unique across GCP."
 }
+variable "dataset_bucket" {
+  type = string
+  description = "The name of the Google Cloud Storage bucket where logs will be stored. It must be globally unique across GCP."
+}
