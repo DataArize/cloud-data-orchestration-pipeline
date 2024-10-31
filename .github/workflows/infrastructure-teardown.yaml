@@ -17,6 +17,7 @@ jobs:
       TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
       TF_VAR_project_region: ${{ secrets.PROJECT_REGION }}
 
+
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4
