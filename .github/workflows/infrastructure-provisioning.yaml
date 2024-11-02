@@ -59,6 +59,11 @@ jobs:
         working-directory: ${{ env.DIR }}
         run: terraform apply -auto-approve tfplan
 
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: '>= 363.0.0'
+
       - name: Check Active Account
         run: gcloud auth list
 
