@@ -19,6 +19,7 @@ resource "google_bigquery_dataset" "bigquery_dataset" {
 
 
 resource "google_bigquery_table" "bigquery_table" {
+  depends_on = [google_bigquery_dataset.bigquery_dataset]
   dataset_id = google_bigquery_dataset.bigquery_dataset.dataset_id
   table_id   = var.table_name
   project = var.project_id
@@ -28,4 +29,6 @@ resource "google_bigquery_table" "bigquery_table" {
   labels = {
     environment = var.environment
   }
+
+  deletion_protection = false
 }
