@@ -85,4 +85,8 @@ variable "logging_bucket" {
   description = "The name of the Google Cloud Storage bucket where logs will be stored. It must be globally unique across GCP."
 }
 
+variable "composer_bucket" {
+  type = string
+  description = "composer bucket"
+}
 

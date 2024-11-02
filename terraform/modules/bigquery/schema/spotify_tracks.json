@@ -1,0 +1,128 @@
+[
+  {
+    "name": "Id",
+    "mode": "NULLABLE",
+    "type": "INTEGER",
+    "description": ""
+  },
+  {
+    "name": "track_id",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": ""
+  },
+  {
+    "name": "artists",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": ""
+  },
+  {
+    "name": "album_name",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": ""
+  },
+  {
+    "name": "track_name",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": ""
+  },
+  {
+    "name": "popularity",
+    "mode": "NULLABLE",
+    "type": "INTEGER",
+    "description": ""
+  },
+  {
+    "name": "duration_ms",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": ""
+  },
+  {
+    "name": "explicit",
+    "mode": "NULLABLE",
+    "type": "BOOLEAN",
+    "description": ""
+  },
+  {
+    "name": "danceability",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": ""
+  },
+  {
+    "name": "energy",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": ""
+  },
+  {
+    "name": "key",
+    "mode": "NULLABLE",
+    "type": "INTEGER",
+    "description": ""
+  },
+  {
+    "name": "loudness",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": ""
+  },
+  {
+    "name": "mode",
+    "mode": "NULLABLE",
+    "type": "INTEGER",
+    "description": ""
+  },
+  {
+    "name": "speechiness",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": ""
+  },
+  {
+    "name": "acousticness",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": ""
+  },
+  {
+    "name": "instrumentalness",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": ""
+  },
+  {
+    "name": "liveness",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": ""
+  },
+  {
+    "name": "valence",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": ""
+  },
+  {
+    "name": "tempo",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": ""
+  },
+  {
+    "name": "time_signature",
+    "mode": "NULLABLE",
+    "type": "INTEGER",
+    "description": ""
+  },
+  {
+    "name": "track_genre",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": ""
+  }
+]

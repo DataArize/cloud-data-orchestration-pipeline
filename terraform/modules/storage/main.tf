@@ -10,6 +10,8 @@ resource "google_storage_bucket" "storage_bucket" {
     uniform_bucket_level_access = true
     public_access_prevention = var.access_prevention_policy
 
+    force_destroy = true
+
     lifecycle_rule {
       action {
         type = var.change_storage_type
@@ -75,6 +77,8 @@ resource "google_storage_bucket" "logging_bucket" {
     uniform_bucket_level_access = true
     public_access_prevention = var.access_prevention_policy
 
+    force_destroy = true
+
     lifecycle_rule {
       action {
         type = var.change_storage_type
@@ -117,5 +121,24 @@ resource "google_storage_bucket" "logging_bucket" {
     labels = {
       environment = var.environment
     }
+
+}
+
+resource "google_storage_bucket" "composer_bucket" {
+  name = var.composer_bucket
+  location = var.project_region
+  project = var.project_id
+
+  versioning {
+    enabled = true
+  }
+
+  public_access_prevention = var.access_prevention_policy
+
+  force_destroy = true
+
+  labels = {
+    environment = var.environment
+  }
 
 }
