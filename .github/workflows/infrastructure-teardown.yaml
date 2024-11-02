@@ -12,10 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TF_VAR_environment: ${{ secrets.ENVIRONMENT }}
-      TF_VAR_logging_bucket: ${{ secrets.LOGGING_BUCKET }}
-      TF_VAR_storage_bucket: ${{ secrets.STORAGE_BUCKET }}
+      TF_VAR_logging_bucket: ${{ secrets.LOGGING_BUCKET_NAME }}
+      TF_VAR_storage_bucket: ${{ secrets.STORAGE_BUCKET_NAME }}
       TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
       TF_VAR_project_region: ${{ secrets.PROJECT_REGION }}
+      TF_VAR_dataflow_bucket: ${{ secrets.DATAFLOW_BUCKET_NAME }}
+      TF_VAR_dataset_name: ${{ secrets.BIGQUERY_DATASET_NAME }}
+      TF_VAR_service_account_name: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+      TF_VAR_table_name: ${{ secrets.BIGQUERY_TABLE_NAME }}
 
 
     steps:

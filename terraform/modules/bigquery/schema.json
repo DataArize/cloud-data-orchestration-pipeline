@@ -1,0 +1,86 @@
+[
+      {
+        "name": "Id",
+        "type": "INTEGER"
+      },
+      {
+        "name": "track_id",
+        "type": "STRING"
+      },
+      {
+        "name": "artists",
+        "type": "STRING"
+      },
+      {
+        "name": "album_name",
+        "type": "STRING"
+      },
+      {
+        "name": "track_name",
+        "type": "STRING"
+      },
+      {
+        "name": "popularity",
+        "type": "INTEGER"
+      },
+      {
+        "name": "duration_ms",
+        "type": "FLOAT"
+      },
+      {
+        "name": "explicit",
+        "type": "BOOLEAN"
+      },
+      {
+        "name": "danceability",
+        "type": "FLOAT"
+      },
+      {
+        "name": "energy",
+        "type": "FLOAT"
+      },
+      {
+        "name": "key",
+        "type": "INTEGER"
+      },
+      {
+        "name": "loudness",
+        "type": "FLOAT"
+      },
+      {
+        "name": "mode",
+        "type": "INTEGER"
+      },
+      {
+        "name": "speechiness",
+        "type": "FLOAT"
+      },
+      {
+        "name": "acousticness",
+        "type": "FLOAT"
+      },
+      {
+        "name": "instrumentalness",
+        "type": "FLOAT"
+      },
+      {
+        "name": "liveness",
+        "type": "FLOAT"
+      },
+      {
+        "name": "valence",
+        "type": "FLOAT"
+      },
+      {
+        "name": "tempo",
+        "type": "FLOAT"
+      },
+      {
+        "name": "time_signature",
+        "type": "INTEGER"
+      },
+      {
+        "name": "track_genre",
+        "type": "STRING"
+      }
+]
