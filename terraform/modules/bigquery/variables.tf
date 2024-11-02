@@ -69,6 +69,6 @@ variable "table_description" {
 
 variable "schema_file_path" {
   type        = string
-  default     = "././terraform/modules/bigquery/schema.json"
+  default     = "./terraform/modules/bigquery/schema.json"
   description = "Path to the schema file for the BigQuery table (supports JSON or YAML formats)."
 }
