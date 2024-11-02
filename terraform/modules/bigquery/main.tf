@@ -19,7 +19,7 @@ resource "google_bigquery_dataset" "bigquery_dataset" {
 
 
 resource "google_bigquery_table" "bigquery_table" {
-  dataset_id = google_bigquery_dataset.bigquery_dataset.id
+  dataset_id = google_bigquery_dataset.bigquery_dataset.dataset_id
   table_id   = var.table_name
   project = var.project_id
   description = var.table_description
