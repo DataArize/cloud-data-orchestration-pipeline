@@ -1,86 +1,107 @@
 [
-      {
-        "name": "Id",
-        "type": "INTEGER"
-      },
-      {
-        "name": "track_id",
-        "type": "STRING"
-      },
-      {
-        "name": "artists",
-        "type": "STRING"
-      },
-      {
-        "name": "album_name",
-        "type": "STRING"
-      },
-      {
-        "name": "track_name",
-        "type": "STRING"
-      },
-      {
-        "name": "popularity",
-        "type": "INTEGER"
-      },
-      {
-        "name": "duration_ms",
-        "type": "FLOAT"
-      },
-      {
-        "name": "explicit",
-        "type": "BOOLEAN"
-      },
-      {
-        "name": "danceability",
-        "type": "FLOAT"
-      },
-      {
-        "name": "energy",
-        "type": "FLOAT"
-      },
-      {
-        "name": "key",
-        "type": "INTEGER"
-      },
-      {
-        "name": "loudness",
-        "type": "FLOAT"
-      },
-      {
-        "name": "mode",
-        "type": "INTEGER"
-      },
-      {
-        "name": "speechiness",
-        "type": "FLOAT"
-      },
-      {
-        "name": "acousticness",
-        "type": "FLOAT"
-      },
-      {
-        "name": "instrumentalness",
-        "type": "FLOAT"
-      },
-      {
-        "name": "liveness",
-        "type": "FLOAT"
-      },
-      {
-        "name": "valence",
-        "type": "FLOAT"
-      },
-      {
-        "name": "tempo",
-        "type": "FLOAT"
-      },
-      {
-        "name": "time_signature",
-        "type": "INTEGER"
-      },
-      {
-        "name": "track_genre",
-        "type": "STRING"
-      }
+  {
+    "name": "Id",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "track_id",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "artists",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "album_name",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "track_name",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "popularity",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "duration_ms",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "explicit",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "danceability",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "energy",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "key",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "loudness",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "mode",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "speechiness",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "acousticness",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "instrumentalness",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "liveness",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "valence",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "tempo",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "time_signature",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "track_genre",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  }
 ]
