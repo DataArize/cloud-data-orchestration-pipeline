@@ -59,6 +59,9 @@ jobs:
         working-directory: ${{ env.DIR }}
         run: terraform apply -auto-approve tfplan
 
+      - name: Check Active Account
+        run: gcloud auth list
+
       - name: Transfer dataflow code to cloud storage
         run: |
           gsutil -m cp -r ./dataflow/src gs://${{ secrets.DATAFLOW_BUCKET_NAME }}

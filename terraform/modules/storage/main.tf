@@ -129,6 +129,7 @@ resource "google_storage_bucket" "dataflow_bucket" {
     location = var.project_region
     project = var.project_id
 
+
     versioning {
       enabled = true
     }
