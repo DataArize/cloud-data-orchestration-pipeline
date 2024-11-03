@@ -9,6 +9,11 @@ resource "google_bigquery_dataset" "bigquery_dataset" {
     user_by_email = var.service_account_name
   }
 
+  access {
+    role = var.role_owner
+    user_by_email = var.owner_email
+  }
+
   labels = {
     environment = var.environment
   }

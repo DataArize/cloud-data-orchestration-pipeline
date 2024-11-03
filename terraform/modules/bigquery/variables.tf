@@ -72,3 +72,9 @@ variable "schema_file_path" {
   default     = "../../modules/bigquery/schema.json"
   description = "Path to the schema file for the BigQuery table (supports JSON or YAML formats)."
 }
+
+variable "owner_email" {
+  type = string
+  default = "gcpprachi@gmail.com"
+  description = "Email of the user"
+}
