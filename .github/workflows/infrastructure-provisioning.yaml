@@ -77,4 +77,4 @@ jobs:
 
       - name: Transfer dataflow code to cloud storage
         run: |
-          gsutil cp dataflow_package.zip gs://${{ secrets.DATAFLOW_BUCKET_NAME }}
+          gsutil cp dataflow.zip gs://${{ secrets.DATAFLOW_BUCKET_NAME }}
