@@ -70,11 +70,12 @@ jobs:
       - name: Check Active Account
         run: gcloud auth list
 
-      - name: Archive source files for Dataflow
-        run: |
-          zip -r dataflow.zip ./dataflow/src
-        shell: bash
+      - name: Docker Auth
+        run: |-
+          gcloud auth configure-docker ${{ env.PROJECT_REGION }}-docker.pkg.dev --quiet
 
-      - name: Transfer dataflow code to cloud storage
-        run: |
-          gsutil cp dataflow.zip gs://${{ secrets.DATAFLOW_BUCKET_NAME }}
+      - name: Build image
+        run: docker build . --file Dockerfile --tag ${{ env.GCP_ARTIFACTORY }}
+
+      - name: Push image
+        run: docker push ${{ env.GCP_ARTIFACTORY }}

@@ -145,7 +145,6 @@ resource "google_storage_bucket" "dataflow_bucket" {
       condition {
         age = var.nearline_storage_age
       }
-
     }
 
     lifecycle_rule {
