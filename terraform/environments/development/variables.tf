@@ -84,3 +84,8 @@ variable "table_name" {
   type        = string
   description = "Name of the BigQuery table for storing Spotify playlist data."
 }
+
+variable "owner_email" {
+  type = string
+  description = "Email of the user"
+}

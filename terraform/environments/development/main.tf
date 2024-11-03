@@ -19,4 +19,5 @@ module "bigquery" {
   project_region = var.project_region
   service_account_name = var.service_account_name
   table_name = var.table_name
+  owner_email = var.owner_email
 }

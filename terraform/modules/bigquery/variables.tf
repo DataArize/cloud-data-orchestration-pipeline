@@ -75,6 +75,5 @@ variable "schema_file_path" {
 
 variable "owner_email" {
   type = string
-  default = "gcpprachi@gmail.com"
   description = "Email of the user"
 }
