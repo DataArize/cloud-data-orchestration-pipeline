@@ -48,3 +48,28 @@ variable "logging_bucket" {
   type = string
   description = "The name of the Google Cloud Storage bucket where logs will be stored. It must be globally unique across GCP."
 }
+
+variable "service_account_name" {
+  type = string
+  description = "Service Account"
+}
+
+variable "composer_name" {
+  type = string
+  description = "composer name"
+}
+
+variable "spotify_dataset_name" {
+  type = string
+  description = "spotify dataset name"
+}
+
+variable "spotify_table_name" {
+  type = string
+  description = "spotify table name"
+}
+
+variable "composer_bucket" {
+  type = string
+  description = "composer bucket"
+}

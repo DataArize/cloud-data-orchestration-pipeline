@@ -4,7 +4,6 @@ resource "google_composer_environment" "composer" {
   project = var.project_id
 
 
-
   config {
     node_config {
       service_account = var.service_account_name
