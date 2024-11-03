@@ -89,3 +89,13 @@ variable "owner_email" {
   type = string
   description = "Email of the user"
 }
+
+variable "composer_bucket" {
+  type = string
+  description = "The name of the Google Cloud Storage bucket where composer related files will be stored. It must be globally unique across GCP."
+}
+
+variable "composer_name" {
+  type = string
+  description = "Name for the composer"
+}
