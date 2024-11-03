@@ -12,11 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TF_VAR_environment: ${{ secrets.ENVIRONMENT }}
-      TF_VAR_logging_bucket: ${{ secrets.LOGGING_BUCKET }}
-      TF_VAR_storage_bucket: ${{ secrets.STORAGE_BUCKET }}
+      TF_VAR_logging_bucket: ${{ secrets.LOGGING_BUCKET_NAME }}
+      TF_VAR_storage_bucket: ${{ secrets.STORAGE_BUCKET_NAME }}
       TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
       TF_VAR_project_region: ${{ secrets.PROJECT_REGION }}
-
+      TF_VAR_dataflow_bucket: ${{ secrets.DATAFLOW_BUCKET_NAME }}
+      TF_VAR_dataset_name: ${{ secrets.BIGQUERY_DATASET_NAME }}
+      TF_VAR_service_account_name: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+      TF_VAR_table_name: ${{ secrets.BIGQUERY_TABLE_NAME }}
+      TF_VAR_owner_email: ${{ secrets.BIGQUERY_TABLE_OWNER }}
+      
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4
@@ -54,3 +59,15 @@ jobs:
       - name: Terraform Apply
         working-directory: ${{ env.DIR }}
         run: terraform apply -auto-approve tfplan
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: '>= 363.0.0'
+
+      - name: Check Active Account
+        run: gcloud auth list
+
+      - name: Transfer dataflow code to cloud storage
+        run: |
+          gsutil -m cp -r ./dataflow/src gs://${{ secrets.DATAFLOW_BUCKET_NAME }}
