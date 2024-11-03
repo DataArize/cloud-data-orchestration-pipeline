@@ -70,6 +70,11 @@ jobs:
       - name: Check Active Account
         run: gcloud auth list
 
+      - name: Archive source files for Dataflow
+        run: |
+          zip -r dataflow.zip ./dataflow/src
+        shell: bash
+
       - name: Transfer dataflow code to cloud storage
         run: |
-          gsutil -m cp -r ./dataflow/src gs://${{ secrets.DATAFLOW_BUCKET_NAME }}
+          gsutil cp dataflow_package.zip gs://${{ secrets.DATAFLOW_BUCKET_NAME }}
