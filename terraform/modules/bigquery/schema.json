@@ -2,12 +2,12 @@
   {
     "name": "Id",
     "type": "INTEGER",
-    "mode": "REQUIRED"
+    "mode": "NULLABLE"
   },
   {
     "name": "track_id",
     "type": "STRING",
-    "mode": "REQUIRED"
+    "mode": "NULLABLE"
   },
   {
     "name": "artists",
