@@ -30,5 +30,4 @@ module "cloud_composer" {
   composer_name = var.composer_name
   service_account_name = var.service_account_name
   composer_bucket_name = module.cloud_storage.composer_bucket_name
-
 }

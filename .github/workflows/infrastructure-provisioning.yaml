@@ -22,7 +22,7 @@ jobs:
       TF_VAR_table_name: ${{ secrets.BIGQUERY_TABLE_NAME }}
       TF_VAR_owner_email: ${{ secrets.BIGQUERY_TABLE_OWNER }}
       TF_VAR_composer_name: ${{ secrets.COMPOSER_NAME }}
-      TF_VAR_composer_bucket_name: ${{ secrets.COMPOSER_BUCKET_NAME }}
+      TF_VAR_composer_bucket: ${{ secrets.COMPOSER_BUCKET_NAME }}
 
     steps:
       - name: Git Checkout
