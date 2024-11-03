@@ -72,10 +72,10 @@ jobs:
 
       - name: Docker Auth
         run: |-
-          gcloud auth configure-docker ${{ env.PROJECT_REGION }}-docker.pkg.dev --quiet
+          gcloud auth configure-docker ${{ secrets.PROJECT_REGION }}-docker.pkg.dev --quiet
 
       - name: Build image
-        run: docker build ./dataflow/src --file Dockerfile --tag ${{ env.GCP_ARTIFACTORY }}
+        run: docker build ./dataflow/src --file Dockerfile --tag ${{ secrets.GCP_ARTIFACTORY }}
 
       - name: Push image
         run: docker push ${{ env.GCP_ARTIFACTORY }}
