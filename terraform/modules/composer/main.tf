@@ -29,6 +29,6 @@ resource "google_composer_environment" "composer" {
 }
 
 data "google_composer_environment" "cluster_name" {
-  name = google_composer_environment.composer.config.gke_cluster
+  name = google_composer_environment.composer.config[0].gke_cluster
   depends_on = [google_composer_environment.composer]
 }
