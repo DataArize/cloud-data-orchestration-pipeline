@@ -70,14 +70,9 @@ jobs:
       - name: Get Terraform Output
         id: output
         run: |
-          terraform output -json > output.json
-        continue-on-error: false
-
-      - name: Read and Use Output
-        run: |
-          echo "Bucket name is: $(jq -r '.cluster_name.value' output.json)"
-        env:
-          CLUSTER_NAME: ${{ steps.output.outputs.cluster_name }}
+          CLUSTER_NAME=$(terraform output -raw cluster_name)
+          echo "Cluster name is: $CLUSTER_NAME"
+          echo "CLUSTER_NAME=$CLUSTER_NAME" >> $GITHUB_ENV
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
@@ -99,7 +94,7 @@ jobs:
 
       - name: Transfer dag code to cloud storage
         run: |
-          gsutil -m cp -r ./airflow/dags/ gs://${{ secrets.COMPOSER_BUCKET_NAME }}/dags
+          gsutil -m cp ./airflow/dags/data_pipeline_dag.py gs://${{ secrets.COMPOSER_BUCKET_NAME }}/dags
 
       - name: Connect to kubernetes cluster
         run: |
