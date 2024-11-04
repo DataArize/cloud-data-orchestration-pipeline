@@ -100,10 +100,20 @@ jobs:
           cluster_name: ${{ env.CLUSTER_NAME }}
           location: ${{ secrets.PROJECT_REGION }}
 
-      - name: Create Namespace and service account
+      - name: Create Namespace and Service Account
         run: |
-          kubectl create namespace ${{ secrets.CLUSTER_NAMESPACE }}
-          kubectl create serviceaccount ${{ secrets.CLUSTER_SERVICE_ACCOUNT_NAME }} --namespace ${{ secrets.CLUSTER_NAMESPACE }}
+          if ! kubectl get namespace "${{ secrets.CLUSTER_NAMESPACE }}" > /dev/null 2>&1; then
+            echo "Namespace ${{ secrets.CLUSTER_NAMESPACE }} does not exist. Creating it..."
+            kubectl create namespace "${{ secrets.CLUSTER_NAMESPACE }}"
+          else
+            echo "Namespace ${{ secrets.CLUSTER_NAMESPACE }} already exists."
+          fi
 
-
+          if ! kubectl get serviceaccount "${{ secrets.CLUSTER_SERVICE_ACCOUNT_NAME }}" --namespace "${{ secrets.CLUSTER_NAMESPACE }}" > /dev/null 2>&1; then
+            echo "Service account ${{ secrets.CLUSTER_SERVICE_ACCOUNT_NAME }} does not exist in namespace ${{ secrets.CLUSTER_NAMESPACE }}. Creating it..."
+            kubectl create serviceaccount "${{ secrets.CLUSTER_SERVICE_ACCOUNT_NAME }}" --namespace "${{ secrets.CLUSTER_NAMESPACE }}"
+          else
+            echo "Service account ${{ secrets.CLUSTER_SERVICE_ACCOUNT_NAME }} already exists in namespace ${{ secrets.CLUSTER_NAMESPACE }}."
+          fi
+      
 

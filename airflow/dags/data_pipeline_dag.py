@@ -1,3 +1,5 @@
+import os
+
 import airflow
 import logging
 from airflow import DAG
@@ -12,14 +14,14 @@ from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import (
     KubernetesPodOperator,
 )
 
-DATASET_BUCKET_NAME = Variable.get("DATASET_BUCKET_NAME")
-SOURCE_FOLDER = Variable.get("SOURCE_FOLDER")
-ARCHIVE_FOLDER = Variable.get("ARCHIVE_FOLDER")
-PROJECT_ID = Variable.get("GCP_PROJECT_ID")
-PROJECT_REGION = Variable.get("GCP_PROJECT_REGION")
-CLUSTER_NAMESPACE = Variable.get("CLUSTER_NAMESPACE")
-CLUSTER_SERVICE_ACCOUNT_NAME = Variable.get("CLUSTER_SERVICE_ACCOUNT_NAME")
-ARTIFACTORY_IMAGE_NAME = Variable.get("ARTIFACTORY_IMAGE_NAME")
+DATASET_BUCKET_NAME = os.getenv("DATASET_BUCKET_NAME")
+SOURCE_FOLDER = os.getenv("SOURCE_FOLDER")
+ARCHIVE_FOLDER = os.getenv("ARCHIVE_FOLDER")
+PROJECT_ID = os.getenv("GCP_PROJECT_ID")
+PROJECT_REGION = os.getenv("GCP_PROJECT_REGION")
+CLUSTER_NAMESPACE = os.getenv("CLUSTER_NAMESPACE")
+CLUSTER_SERVICE_ACCOUNT_NAME = os.getenv("CLUSTER_SERVICE_ACCOUNT_NAME")
+ARTIFACTORY_IMAGE_NAME = os.getenv("ARTIFACTORY_IMAGE_NAME")
 
 
 default_args = {
