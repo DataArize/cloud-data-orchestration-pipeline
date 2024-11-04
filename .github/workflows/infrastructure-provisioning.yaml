@@ -21,7 +21,13 @@ jobs:
       TF_VAR_service_account_name: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
       TF_VAR_table_name: ${{ secrets.BIGQUERY_TABLE_NAME }}
       TF_VAR_owner_email: ${{ secrets.BIGQUERY_TABLE_OWNER }}
-      
+      TF_VAR_composer_name: ${{ secrets.COMPOSER_NAME }}
+      TF_VAR_composer_bucket: ${{ secrets.COMPOSER_BUCKET_NAME }}
+      TF_VAR_repository_name: ${{ secrets.REPOSITORY_NAME }}
+      TF_VAR_cluster_namespace: ${{ secrets.CLUSTER_NAMESPACE }}
+      TF_VAR_cluster_service_account_name: ${{ secrets.CLUSTER_SERVICE_ACCOUNT_NAME }}
+      TF_VAR_artifactory_image_name: ${{ secrets.GCP_ARTIFACTORY_IMAGE_NAME }}
+
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4
@@ -47,6 +53,7 @@ jobs:
           else
             echo "DIR=./terraform/environments/development" >> $GITHUB_ENV
           fi
+
       - name: Terraform Init
         working-directory: ${{ env.DIR }}
         run: terraform init
@@ -58,7 +65,12 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ${{ env.DIR }}
-        run: terraform apply -auto-approve tfplan
+        run: |
+          terraform apply -auto-approve tfplan
+          FULL_CLUSTER_NAME=$(terraform output -raw cluster_name)
+          CLUSTER_NAME=$(echo "$FULL_CLUSTER_NAME" | awk -F'/' '{print $NF}')
+          echo "Cluster name is: $CLUSTER_NAME"
+          echo "CLUSTER_NAME=$CLUSTER_NAME" >> $GITHUB_ENV
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
@@ -68,6 +80,40 @@ jobs:
       - name: Check Active Account
         run: gcloud auth list
 
-      - name: Transfer dataflow code to cloud storage
+      - name: Docker Auth
+        run: |-
+          gcloud auth configure-docker ${{ secrets.PROJECT_REGION }}-docker.pkg.dev --quiet
+
+      - name: Build image
+        run: docker build ./dataflow/src/ --file ./dataflow/src/Dockerfile --tag ${{ secrets.GCP_ARTIFACTORY_IMAGE_NAME }}
+
+      - name: Push image
+        run: docker push ${{ secrets.GCP_ARTIFACTORY_IMAGE_NAME  }}
+
+      - name: Transfer dag code to cloud storage
         run: |
-          gsutil -m cp -r ./dataflow/src gs://${{ secrets.DATAFLOW_BUCKET_NAME }}
+          gsutil -m cp ./airflow/dags/data_pipeline_dag.py gs://${{ secrets.COMPOSER_BUCKET_NAME }}/dags
+
+      - name: GKE auth
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: ${{ env.CLUSTER_NAME }}
+          location: ${{ secrets.PROJECT_REGION }}
+
+      - name: Create Namespace and Service Account
+        run: |
+          if ! kubectl get namespace "${{ secrets.CLUSTER_NAMESPACE }}" > /dev/null 2>&1; then
+            echo "Namespace ${{ secrets.CLUSTER_NAMESPACE }} does not exist. Creating it..."
+            kubectl create namespace "${{ secrets.CLUSTER_NAMESPACE }}"
+          else
+            echo "Namespace ${{ secrets.CLUSTER_NAMESPACE }} already exists."
+          fi
+
+          if ! kubectl get serviceaccount "${{ secrets.CLUSTER_SERVICE_ACCOUNT_NAME }}" --namespace "${{ secrets.CLUSTER_NAMESPACE }}" > /dev/null 2>&1; then
+            echo "Service account ${{ secrets.CLUSTER_SERVICE_ACCOUNT_NAME }} does not exist in namespace ${{ secrets.CLUSTER_NAMESPACE }}. Creating it..."
+            kubectl create serviceaccount "${{ secrets.CLUSTER_SERVICE_ACCOUNT_NAME }}" --namespace "${{ secrets.CLUSTER_NAMESPACE }}"
+          else
+            echo "Service account ${{ secrets.CLUSTER_SERVICE_ACCOUNT_NAME }} already exists in namespace ${{ secrets.CLUSTER_NAMESPACE }}."
+          fi
+      
+
