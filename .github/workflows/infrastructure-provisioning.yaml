@@ -49,6 +49,7 @@ jobs:
           else
             echo "DIR=./terraform/environments/development" >> $GITHUB_ENV
           fi
+
       - name: Terraform Init
         working-directory: ${{ env.DIR }}
         run: terraform init
@@ -61,6 +62,18 @@ jobs:
       - name: Terraform Apply
         working-directory: ${{ env.DIR }}
         run: terraform apply -auto-approve tfplan
+
+      - name: Get Terraform Output
+        id: output
+        run: |
+          terraform output -json > output.json
+        continue-on-error: false
+
+      - name: Read and Use Output
+        run:
+          echo "Bucket name is: $(jq -r '.cluster_name.value' output.json)"
+        env:
+          CLUSTER_NAME: ${{ steps.output.outputs.cluster_name }}
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
@@ -79,3 +92,19 @@ jobs:
 
       - name: Push image
         run: docker push ${{ secrets.GCP_ARTIFACTORY_IMAGE_NAME  }}
+
+      - name: Transfer dag code to cloud storage
+        run: |
+          gsutil -m cp -r ./airflow/dags/ gs://${{ secrets.COMPOSER_BUCKET_NAME }}/dags
+
+      - name: Connect to kubernetes cluster
+        run: |
+          gcloud container clusters get-credentials ${{ env.CLUSTER_NAME }} --region ${{ secrets.PROJECT_REGION }} --project ${{ secrets.PROJECT_ID }}
+
+      - name: Create Namespace and service account
+        run: |
+          kubectl create namespace ${{ secrets.CLUSTER_NAMESPACE }}
+          kubectl create serviceaccount ${{ secrets.CLUSTER_SERVICE_ACCOUNT_NAME }} --namespace ${{ secrets.CLUSTER_NAMESPACE }}
+
+
+

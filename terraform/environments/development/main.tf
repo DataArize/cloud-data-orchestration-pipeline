@@ -30,4 +30,14 @@ module "cloud_composer" {
   composer_name = var.composer_name
   service_account_name = var.service_account_name
   composer_bucket_name = module.cloud_storage.composer_bucket_name
+  dataset_bucket_name = module.cloud_storage.dataset_bucket_name
+  archive_folder_path = var.archive_folder_path
+  source_folder_path = var.source_folder_path
+}
+
+module "artifactory" {
+  source = "../../modules/artifactory"
+  project_id = var.project_id
+  project_region = var.project_region
+  repository_name = var.repository_name
 }

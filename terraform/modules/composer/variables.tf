@@ -36,8 +36,23 @@ variable "composer_bucket_name" {
   description = "Bucket name for composer"
 }
 
+variable "dataset_bucket_name" {
+  type = string
+  description = "The name of the Google Cloud Storage bucket where dataset will be stored. It must be globally unique across GCP."
+}
+
 variable "composer_image_version" {
   type = string
   default = "composer-2.9.6-airflow-2.9.3"
   description = "composer image version"
+}
+
+variable "source_folder_path" {
+  type = string
+  description = "Source folder path for the dataset"
+}
+
+variable "archive_folder_path" {
+  type = string
+  description = "Archive folder path for the dataset"
 }

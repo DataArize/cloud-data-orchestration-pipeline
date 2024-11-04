@@ -99,3 +99,18 @@ variable "composer_name" {
   type = string
   description = "Name for the composer"
 }
+
+variable "source_folder_path" {
+  type = string
+  description = "Source folder path for the dataset"
+}
+
+variable "archive_folder_path" {
+  type = string
+  description = "Archive folder path for the dataset"
+}
+
+variable "repository_name" {
+  type = string
+  description = "Repository name"
+}
