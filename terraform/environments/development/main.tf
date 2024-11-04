@@ -31,8 +31,9 @@ module "cloud_composer" {
   service_account_name = var.service_account_name
   composer_bucket_name = module.cloud_storage.composer_bucket_name
   dataset_bucket_name = module.cloud_storage.dataset_bucket_name
-  archive_folder_path = var.archive_folder_path
-  source_folder_path = var.source_folder_path
+  artifactory_image_name = var.artifactory_image_name
+  cluster_namespace = var.cluster_namespace
+  cluster_service_account_name = var.cluster_service_account_name
 }
 
 module "artifactory" {

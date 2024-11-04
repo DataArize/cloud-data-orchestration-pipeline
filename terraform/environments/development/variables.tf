@@ -100,17 +100,22 @@ variable "composer_name" {
   description = "Name for the composer"
 }
 
-variable "source_folder_path" {
-  type = string
-  description = "Source folder path for the dataset"
-}
-
-variable "archive_folder_path" {
-  type = string
-  description = "Archive folder path for the dataset"
-}
-
 variable "repository_name" {
   type = string
   description = "Repository name"
+}
+
+variable "cluster_namespace" {
+  type = string
+  description = "Namespace on which the dataflow code runs"
+}
+
+variable "cluster_service_account_name" {
+  type = string
+  description = "Name of the service account associated with the cluster"
+}
+
+variable "artifactory_image_name" {
+  type = string
+  description = "Name of the docker image"
 }

@@ -19,6 +19,9 @@ resource "google_composer_environment" "composer" {
         ARCHIVE_FOLDER: var.archive_folder_path
         PROJECT_ID: var.project_id
         PROJECT_REGION: var.project_region
+        CLUSTER_NAMESPACE: var.cluster_namespace
+        CLUSTER_SERVICE_ACCOUNT_NAME: var.cluster_service_account_name
+        ARTIFACTORY_IMAGE_NAME: var.artifactory_image_name
       }
     }
 

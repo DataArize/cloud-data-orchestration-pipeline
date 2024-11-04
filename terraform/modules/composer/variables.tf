@@ -49,10 +49,27 @@ variable "composer_image_version" {
 
 variable "source_folder_path" {
   type = string
+  default = "source"
   description = "Source folder path for the dataset"
 }
 
 variable "archive_folder_path" {
   type = string
+  default = "archive"
   description = "Archive folder path for the dataset"
+}
+
+variable "cluster_namespace" {
+  type = string
+  description = "Namespace on which the dataflow code runs"
+}
+
+variable "cluster_service_account_name" {
+  type = string
+  description = "Name of the service account associated with the cluster"
+}
+
+variable "artifactory_image_name" {
+  type = string
+  description = "Name of the docker image"
 }
