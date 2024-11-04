@@ -67,7 +67,8 @@ jobs:
         working-directory: ${{ env.DIR }}
         run: |
           terraform apply -auto-approve tfplan
-          CLUSTER_NAME=$(terraform output -raw cluster_name)
+          FULL_CLUSTER_NAME=$(terraform output -raw cluster_name)
+          CLUSTER_NAME=$(echo "$FULL_CLUSTER_NAME" | awk -F'/' '{print $NF}')
           echo "Cluster name is: $CLUSTER_NAME"
           echo "CLUSTER_NAME=$CLUSTER_NAME" >> $GITHUB_ENV
 
@@ -93,9 +94,11 @@ jobs:
         run: |
           gsutil -m cp ./airflow/dags/data_pipeline_dag.py gs://${{ secrets.COMPOSER_BUCKET_NAME }}/dags
 
-      - name: Connect to kubernetes cluster
-        run: |
-          gcloud container clusters get-credentials ${{ env.CLUSTER_NAME }} --region ${{ secrets.PROJECT_REGION }} --project ${{ secrets.PROJECT_ID }}
+      - name: GKE auth
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: ${{ env.CLUSTER_NAME }}
+          location: ${{ secrets.PROJECT_REGION }}
 
       - name: Create Namespace and service account
         run: |
