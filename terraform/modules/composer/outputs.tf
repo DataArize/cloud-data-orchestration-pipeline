@@ -1,3 +1,3 @@
 output "cluster_name" {
-  value = data.google_composer_environment.cluster_name.name
+  value = google_composer_environment.composer.config[0].gke_cluster
 }
