@@ -42,3 +42,7 @@ module "artifactory" {
   project_region = var.project_region
   repository_name = var.repository_name
 }
+
+output "cluster_name" {
+  value = module.cloud_composer.cluster_name
+}
