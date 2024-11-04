@@ -24,6 +24,7 @@ CLUSTER_SERVICE_ACCOUNT_NAME = os.getenv("CLUSTER_SERVICE_ACCOUNT_NAME")
 ARTIFACTORY_IMAGE_NAME = os.getenv("GCP_ARTIFACTORY_IMAGE_NAME")
 
 
+
 default_args = {
     'start_date': airflow.utils.dates.days_ago(0),
     'retries': 1,
@@ -31,7 +32,7 @@ default_args = {
 }
 
 dag = DAG(
-    'data_ingestion_dag',
+    'data_ingestion_da',
     default_args=default_args,
     description='CSV file load dag',
     schedule_interval='* 10 * * *',
@@ -65,11 +66,11 @@ check_files_task = ShortCircuitOperator(
 )
 
 start_dataflow = KubernetesPodOperator(
-    task_id="run_dataflow",
-    name="run_dataflow",
+    task_id="pod-ex-minimum",
+    name="pod-ex-minimum",
     namespace=CLUSTER_NAMESPACE,
     service_account_name=CLUSTER_SERVICE_ACCOUNT_NAME,
-    image=ARTIFACTORY_IMAGE_NAME,
+    image="asia-south1-docker.pkg.dev/optimal-karma-439613-g6/prj01-cloud-data-orch-repository/prj01-cloud-data-orch-dataflow",
 )
 
 archive_files = GCSToGCSOperator(
@@ -77,7 +78,7 @@ archive_files = GCSToGCSOperator(
     source_bucket=DATASET_BUCKET_NAME,
     source_object=f"{SOURCE_FOLDER}*.csv",
     destination_bucket=DATASET_BUCKET_NAME,
-    destination_object=f"{ARCHIVE_FOLDER}{{{{ ds }}}}/",
+    destination_object=f"{ARCHIVE_FOLDER}/{{{{ ds }}}}/",
     move_object=True,  # Move file instead of copy
     dag=dag
 )
