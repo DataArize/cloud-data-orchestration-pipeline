@@ -89,3 +89,33 @@ variable "owner_email" {
   type = string
   description = "Email of the user"
 }
+
+variable "composer_bucket" {
+  type = string
+  description = "The name of the Google Cloud Storage bucket where composer related files will be stored. It must be globally unique across GCP."
+}
+
+variable "composer_name" {
+  type = string
+  description = "Name for the composer"
+}
+
+variable "repository_name" {
+  type = string
+  description = "Repository name"
+}
+
+variable "cluster_namespace" {
+  type = string
+  description = "Namespace on which the dataflow code runs"
+}
+
+variable "cluster_service_account_name" {
+  type = string
+  description = "Name of the service account associated with the cluster"
+}
+
+variable "artifactory_image_name" {
+  type = string
+  description = "Name of the docker image"
+}

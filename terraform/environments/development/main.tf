@@ -10,6 +10,7 @@ module "cloud_storage" {
   nearline_storage_age = var.nearline_storage_age
   storage_bucket = var.storage_bucket
   dataflow_bucket = var.dataflow_bucket
+  composer_bucket = var.composer_bucket
 }
 
 module "bigquery" {
@@ -20,4 +21,28 @@ module "bigquery" {
   service_account_name = var.service_account_name
   table_name = var.table_name
   owner_email = var.owner_email
+}
+
+module "cloud_composer" {
+  source = "../../modules/composer"
+  project_id = var.project_id
+  project_region = var.project_region
+  composer_name = var.composer_name
+  service_account_name = var.service_account_name
+  composer_bucket_name = module.cloud_storage.composer_bucket_name
+  dataset_bucket_name = module.cloud_storage.dataset_bucket_name
+  artifactory_image_name = var.artifactory_image_name
+  cluster_namespace = var.cluster_namespace
+  cluster_service_account_name = var.cluster_service_account_name
+}
+
+module "artifactory" {
+  source = "../../modules/artifactory"
+  project_id = var.project_id
+  project_region = var.project_region
+  repository_name = var.repository_name
+}
+
+output "cluster_name" {
+  value = module.cloud_composer.cluster_name
 }
