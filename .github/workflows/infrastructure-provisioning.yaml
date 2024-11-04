@@ -65,11 +65,8 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ${{ env.DIR }}
-        run: terraform apply -auto-approve tfplan
-
-      - name: Get Terraform Output
-        id: output
         run: |
+          terraform apply -auto-approve tfplan
           CLUSTER_NAME=$(terraform output -raw cluster_name)
           echo "Cluster name is: $CLUSTER_NAME"
           echo "CLUSTER_NAME=$CLUSTER_NAME" >> $GITHUB_ENV
